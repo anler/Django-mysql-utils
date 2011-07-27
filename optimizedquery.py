@@ -8,7 +8,7 @@ class Query(sql.Query):
     is called with no additional constraints. In all other cases it should
     behave exactly as QuerySet.
     Only works with MySQL. Behaves normally for all other engines.
-    
+
     Usage:
     Just create a custom Manager that uses this class instead of Django's and
     use that manager in your model.
@@ -26,7 +26,7 @@ class Query(sql.Query):
         # In only the case we are simply doing a plain
         # "SELECT COUNT(*) FROM foo" query. Hack the query so we
         # get an approximation(faster result) instead. 
-        sql = str(self)
+        sql = unicode(self)
         if 'WHERE' in sql:
             return super(MySQLOptimizedQuery, self).get_count(using)
         else:
